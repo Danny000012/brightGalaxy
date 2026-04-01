@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1Bright Galaxy — Courier & Delivery Service</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue:       #1447E6;
+  --blue-mid:   #2563EB;
+  --blue-light: #3B82F6;
+  --blue-pale:  #EFF6FF;
+  --sky:        #38BDF8;
+  --white:      #FFFFFF;
+  --off-white:  #F8FAFF;
+  --slate:      #64748B;
+  --dark:       #0F172A;
+  --mid:        #1E293B;
+  --green:      #10B981;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: var(--white);
+  color: var(--dark);
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width:5px; }
+::-webkit-scrollbar-track { background:#f1f5f9; }
+::-webkit-scrollbar-thumb { background:var(--blue-light); border-radius:3px; }
+
+/* ── NAV ── */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:200;
+  height:72px;
+  background:rgba(255,255,255,0.92);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(20,71,230,0.08);
+  display:flex; align-items:center;
+  padding:0 6%; justify-content:space-between;
+  transition:box-shadow .3s;
+}
+nav.scrolled { box-shadow:0 4px 30px rgba(20,71,230,0.1); }
+
+.logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
+.logo-star {
+  width:36px; height:36px;
+  background:linear-gradient(135deg,var(--blue) 0%,var(--sky) 100%);
+  clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+  flex-shrink:0;
+}
+.logo-text { font-family:'Syne',sans-serif; font-size:1.1rem; font-weight:800; color:var(--dark); }
+.logo-text span { color:var(--blue); }
+
+.nav-links { display:flex; gap:4px; list-style:none; align-items:center; }
+.nav-links a {
+  padding:8px 14px; font-size:0.84rem; font-weight:500;
+  color:var(--slate); text-decoration:none; border-radius:100px; transition:all .2s;
+}
+.nav-links a:hover { background:var(--blue-pale); color:var(--blue); }
+
+.nav-btn {
+  background:var(--blue); color:var(--white);
+  border:none; padding:10px 22px;
+  font-family:'Plus Jakarta Sans',sans-serif; font-weight:600; font-size:0.84rem;
+  border-radius:100px; cursor:pointer; transition:all .25s;
+  box-shadow:0 4px 14px rgba(20,71,230,0.3);
+}
+.nav-btn:hover { transform:translateY(-1px); box-shadow:0 6px 20px rgba(20,71,230,0.4); }
+
+/* ── HERO ── */
+#hero {
+  min-height:100vh; padding:140px 6% 80px;
+  position:relative; overflow:hidden;
+  display:flex; align-items:center;
+  background:var(--off-white);
+}
+
+.hero-blob { position:absolute; border-radius:50%; filter:blur(90px); pointer-events:none; }
+.blob-1 {
+  width:700px; height:700px;
+  background:radial-gradient(circle,rgba(20,71,230,0.1) 0%,transparent 70%);
+  top:-150px; right:-150px;
+  animation:blobF 9s ease-in-out infinite;
+}
+.blob-2 {
+  width:500px; height:500px;
+  background:radial-gradient(circle,rgba(56,189,248,0.13) 0%,transparent 70%);
+  bottom:0; left:10%;
+  animation:blobF 11s ease-in-out infinite reverse;
+}
+@keyframes blobF { 0%,100%{transform:translate(0,0)} 50%{transform:translate(25px,-25px)} }
+
+.hero-inner {
+  position:relative; z-index:2;
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:60px; align-items:center; width:100%;
+  max-width:1200px; margin:0 auto;
+}
+
+.hero-badge {
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--white); border:1px solid rgba(20,71,230,0.2);
+  border-radius:100px; padding:6px 16px 6px 8px; margin-bottom:24px;
+  box-shadow:0 2px 12px rgba(20,71,230,0.08);
+}
+.badge-dot {
+  width:22px; height:22px;
+  background:linear-gradient(135deg,var(--blue),var(--sky));
+  border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-size:0.55rem; color:white; font-weight:700;
+}
+.hero-badge span { font-size:0.78rem; font-weight:600; color:var(--blue); }
+
+.hero-left h1 {
+  font-family:'Syne',sans-serif;
+  font-size:clamp(2.8rem,5vw,4.4rem);
+  font-weight:800; line-height:1.05;
+  letter-spacing:-1.5px; margin-bottom:20px;
+}
+.grad { 
+  background:linear-gradient(135deg,var(--blue) 0%,var(--sky) 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+}
+
+.hero-desc { font-size:1.05rem; line-height:1.75; color:var(--slate); margin-bottom:36px; max-width:480px; }
+
+.hero-actions { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:44px; }
+
+.btn-blue {
+  background:var(--blue); color:var(--white); border:none;
+  padding:14px 30px; font-family:'Plus Jakarta Sans',sans-serif;
+  font-weight:600; font-size:0.9rem; border-radius:100px; cursor:pointer;
+  transition:all .25s; text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+  box-shadow:0 4px 16px rgba(20,71,230,0.3);
+}
+.btn-blue:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(20,71,230,0.4); }
+
+.btn-ghost {
+  background:transparent; color:var(--dark);
+  border:1.5px solid rgba(15,23,42,0.15); padding:14px 30px;
+  font-family:'Plus Jakarta Sans',sans-serif; font-weight:600; font-size:0.9rem;
+  border-radius:100px; cursor:pointer; transition:all .25s;
+  text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+}
+.btn-ghost:hover { border-color:var(--blue); color:var(--blue); background:var(--blue-pale); }
+
+.hero-trust { display:flex; align-items:center; gap:14px; font-size:0.82rem; color:var(--slate); }
+.trust-avs { display:flex; }
+.trust-avs div {
+  width:30px; height:30px; border-radius:50%; border:2px solid white;
+  margin-left:-7px; background:linear-gradient(135deg,var(--blue-light),var(--sky));
+  display:flex; align-items:center; justify-content:center;
+  font-size:0.65rem; font-weight:700; color:white;
+}
+.trust-avs div:first-child { margin-left:0; }
+
+/* TRACK CARD */
+.hero-right { position:relative; }
+
+.track-card {
+  background:var(--white); border-radius:24px; padding:32px;
+  box-shadow:0 20px 60px rgba(20,71,230,0.12),0 4px 16px rgba(0,0,0,0.06);
+  position:relative; z-index:2;
+  animation:cardF 6s ease-in-out infinite;
+}
+@keyframes cardF { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+
+.card-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:28px; }
+.card-title { font-weight:700; font-size:0.92rem; color:var(--dark); }
+.status-pill {
+  background:#DCFCE7; color:#16A34A; padding:4px 12px; border-radius:100px;
+  font-size:0.72rem; font-weight:600; display:flex; align-items:center; gap:5px;
+}
+.status-pill::before { content:''; width:5px; height:5px; background:#16A34A; border-radius:50%; animation:dp 1.5s infinite; }
+@keyframes dp { 0%,100%{opacity:1}50%{opacity:.3} }
+
+.steps { display:flex; flex-direction:column; margin-bottom:22px; }
+.step { display:flex; gap:14px; align-items:flex-start; }
+.step-col { display:flex; flex-direction:column; align-items:center; flex-shrink:0; }
+.sdot {
+  width:30px; height:30px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:0.8rem; font-weight:700;
+}
+.sdot.done { background:var(--blue); color:white; }
+.sdot.active {
+  background:linear-gradient(135deg,var(--blue),var(--sky)); color:white;
+  box-shadow:0 4px 12px rgba(20,71,230,0.4);
+  animation:sp 2s infinite;
+}
+@keyframes sp { 0%,100%{box-shadow:0 4px 12px rgba(20,71,230,0.35)} 50%{box-shadow:0 4px 20px rgba(20,71,230,0.65)} }
+.sdot.pend { background:#F1F5F9; color:var(--slate); }
+.sline { width:2px; flex:1; min-height:14px; background:#E2E8F0; margin:2px 0; }
+.sline.done { background:var(--blue); }
+.sinfo { padding-top:3px; padding-bottom:18px; }
+.slabel { font-size:0.86rem; font-weight:600; color:var(--dark); }
+.ssub { font-size:0.74rem; color:var(--slate); margin-top:1px; }
+
+.eta-box {
+  background:var(--blue-pale); border-radius:14px; padding:14px 18px;
+  display:flex; justify-content:space-between; align-items:center;
+}
+.eta-lbl { font-size:0.76rem; color:var(--slate); font-weight:500; }
+.eta-val { font-size:1.05rem; font-weight:700; color:var(--blue); }
+
+.mini-card {
+  position:absolute; background:white; border-radius:14px; padding:12px 16px;
+  box-shadow:0 8px 32px rgba(0,0,0,0.1);
+  display:flex; align-items:center; gap:10px; white-space:nowrap;
+  animation:cardF 5s ease-in-out infinite;
+}
+.mc1 { top:-20px; left:-40px; animation-delay:1s; }
+.mc2 { bottom:20px; right:-28px; animation-delay:2.5s; }
+.mci { width:34px; height:34px; border-radius:9px; display:flex; align-items:center; justify-content:center; font-size:0.95rem; }
+.mci.b { background:var(--blue-pale); }
+.mci.g { background:#DCFCE7; }
+.mct .t { font-size:0.74rem; font-weight:700; color:var(--dark); }
+.mct .b { font-size:0.68rem; color:var(--slate); }
+
+/* ── STATS ── */
+.stats-strip { background:var(--blue); padding:44px 6%; }
+.stats-inner {
+  max-width:1200px; margin:0 auto;
+  display:grid; grid-template-columns:repeat(4,1fr); gap:2px;
+}
+.stat-item { padding:20px 28px; text-align:center; border-right:1px solid rgba(255,255,255,0.15); }
+.stat-item:last-child { border-right:none; }
+.stat-num { font-family:'Syne',sans-serif; font-size:2.4rem; font-weight:800; color:white; line-height:1; }
+.stat-lbl { font-size:0.8rem; color:rgba(255,255,255,0.6); margin-top:4px; font-weight:500; }
+
+/* ── SECTION BASE ── */
+section { padding:100px 6%; }
+.section-inner { max-width:1200px; margin:0 auto; }
+.chip {
+  display:inline-flex; align-items:center; gap:6px;
+  background:var(--blue-pale); color:var(--blue);
+  font-size:0.74rem; font-weight:700; letter-spacing:1px; text-transform:uppercase;
+  padding:5px 14px; border-radius:100px; margin-bottom:14px;
+}
+h2.st { font-family:'Syne',sans-serif; font-size:clamp(2rem,4vw,3rem); font-weight:800; letter-spacing:-1px; line-height:1.1; margin-bottom:14px; }
+.sd { font-size:1rem; color:var(--slate); line-height:1.8; max-width:520px; }
+
+/* ── SERVICES ── */
+#services { background:var(--off-white); }
+.svc-top { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:48px; flex-wrap:wrap; gap:20px; }
+.svc-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:18px; }
+
+.svc-card {
+  background:var(--white); border-radius:20px; padding:34px 26px;
+  border:1.5px solid rgba(20,71,230,0.07); transition:all .3s; cursor:default; position:relative; overflow:hidden;
+}
+.svc-card::after {
+  content:''; position:absolute; bottom:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg,var(--blue),var(--sky));
+  transform:scaleX(0); transform-origin:left; transition:transform .35s;
+}
+.svc-card:hover { transform:translateY(-6px); border-color:rgba(20,71,230,.2); box-shadow:0 16px 40px rgba(20,71,230,.1); }
+.svc-card:hover::after { transform:scaleX(1); }
+.svc-ico { width:50px; height:50px; border-radius:13px; background:var(--blue-pale); display:flex; align-items:center; justify-content:center; font-size:1.3rem; margin-bottom:18px; }
+.svc-name { font-weight:700; font-size:1.02rem; margin-bottom:9px; color:var(--dark); }
+.svc-desc { font-size:0.86rem; color:var(--slate); line-height:1.7; }
+
+/* ── ABOUT ── */
+#about .section-inner { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+
+.about-vis { position:relative; }
+.about-box {
+  background:linear-gradient(135deg,var(--blue) 0%,#1E40AF 50%,var(--sky) 100%);
+  border-radius:24px; padding:48px 40px; color:white; position:relative; overflow:hidden; min-height:400px;
+  display:flex; flex-direction:column; justify-content:flex-end;
+}
+.about-box::before {
+  content:''; position:absolute; inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");
+}
+.about-big { font-family:'Syne',sans-serif; font-size:6rem; font-weight:800; line-height:1; opacity:.07; position:absolute; top:16px; right:20px; pointer-events:none; }
+.about-q { font-size:1.08rem; font-weight:600; line-height:1.6; margin-bottom:10px; position:relative; z-index:2; }
+.about-cap { font-size:0.78rem; opacity:.65; position:relative; z-index:2; }
+
+.ab-badge {
+  position:absolute; top:20px; left:-16px;
+  background:white; border-radius:14px; padding:12px 16px;
+  box-shadow:0 8px 32px rgba(0,0,0,0.12);
+  display:flex; align-items:center; gap:10px;
+}
+.ab-ico { width:36px; height:36px; background:var(--blue-pale); border-radius:9px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; }
+.ab-info .t { font-size:0.78rem; font-weight:700; color:var(--dark); }
+.ab-info .b { font-size:0.7rem; color:var(--slate); }
+
+.vals { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:28px; }
+.val {
+  background:var(--white); border:1.5px solid rgba(20,71,230,0.1);
+  border-radius:14px; padding:16px 18px;
+  display:flex; align-items:flex-start; gap:10px; transition:.3s;
+}
+.val:hover { border-color:var(--blue); background:var(--blue-pale); }
+.val-ico { width:34px; height:34px; background:var(--blue-pale); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:0.95rem; flex-shrink:0; }
+.val-title { font-size:0.83rem; font-weight:700; color:var(--dark); }
+.val-sub { font-size:0.73rem; color:var(--slate); margin-top:1px; }
+
+/* ── MISSION ── */
+#mission { background:var(--dark); color:white; }
+#mission .sd { color:rgba(255,255,255,.5); }
+.mv-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:48px; }
+.mv-card { border-radius:20px; padding:44px 38px; position:relative; overflow:hidden; }
+.mv-card.blue { background:linear-gradient(135deg,var(--blue),#1E40AF); color:white; }
+.mv-card.outline { background:rgba(255,255,255,.04); border:1.5px solid rgba(255,255,255,.1); color:white; }
+.mv-card.outline:hover { border-color:rgba(56,189,248,.4); }
+.mv-big { font-family:'Syne',sans-serif; font-size:7rem; font-weight:800; opacity:.05; position:absolute; bottom:-20px; right:16px; line-height:1; pointer-events:none; }
+.mv-lbl { font-size:0.7rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; opacity:.55; margin-bottom:18px; display:flex; align-items:center; gap:8px; }
+.mv-lbl::after { content:''; flex:1; height:1px; background:currentColor; opacity:.2; }
+.mv-h { font-family:'Syne',sans-serif; font-size:1.4rem; font-weight:800; margin-bottom:14px; }
+.mv-t { font-size:0.89rem; line-height:1.85; opacity:.7; }
+
+/* ── SCOPE ── */
+#scope { background:var(--off-white); }
+.scope-head { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; margin-bottom:52px; }
+.scope-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+.scope-card {
+  background:white; border-radius:20px; padding:34px 26px; text-align:center;
+  border:1.5px solid rgba(20,71,230,0.06); transition:.3s;
+}
+.scope-card:hover { transform:translateY(-4px); box-shadow:0 12px 32px rgba(20,71,230,.1); border-color:rgba(20,71,230,.15); }
+.scope-num {
+  font-family:'Syne',sans-serif; font-size:2.8rem; font-weight:800;
+  background:linear-gradient(135deg,var(--blue),var(--sky));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  line-height:1; margin-bottom:10px;
+}
+.scope-title { font-weight:700; font-size:0.93rem; margin-bottom:7px; }
+.scope-desc { font-size:0.82rem; color:var(--slate); line-height:1.6; }
+
+/* ── CONTACT ── */
+#contact { background:white; }
+.cg { display:grid; grid-template-columns:1fr 1.2fr; gap:80px; align-items:start; margin-top:48px; }
+.ci { display:flex; flex-direction:column; }
+.ci-card { display:flex; gap:16px; align-items:flex-start; padding:22px 0; border-bottom:1px solid rgba(0,0,0,0.06); }
+.ci-card:first-child { padding-top:0; }
+.ci-ico { width:44px; height:44px; border-radius:12px; background:var(--blue-pale); display:flex; align-items:center; justify-content:center; font-size:1rem; flex-shrink:0; }
+.ci-lbl { font-size:0.7rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--blue); margin-bottom:3px; }
+.ci-val { font-size:0.92rem; color:var(--dark); font-weight:500; line-height:1.6; }
+
+.cfwrap { background:var(--off-white); border-radius:24px; padding:38px; border:1.5px solid rgba(20,71,230,0.08); }
+.cf-title { font-family:'Syne',sans-serif; font-size:1.25rem; font-weight:800; margin-bottom:22px; }
+.fg { margin-bottom:14px; }
+.fr { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px; }
+label { display:block; font-size:0.73rem; font-weight:600; letter-spacing:.5px; text-transform:uppercase; color:var(--slate); margin-bottom:5px; }
+input,textarea,select {
+  width:100%; background:white; border:1.5px solid rgba(20,71,230,0.12);
+  border-radius:12px; padding:12px 15px; font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:0.88rem; color:var(--dark); outline:none; transition:border-color .2s;
+}
+input:focus,textarea:focus,select:focus { border-color:var(--blue); box-shadow:0 0 0 3px rgba(20,71,230,.09); }
+textarea { resize:none; min-height:100px; }
+
+/* ── FOOTER ── */
+footer { background:var(--dark); color:white; padding:56px 6% 28px; }
+.ft { display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:60px; padding-bottom:44px; border-bottom:1px solid rgba(255,255,255,.08); }
+.fb { font-family:'Syne',sans-serif; font-size:1.25rem; font-weight:800; margin-bottom:10px; }
+.fb span { color:var(--sky); }
+.ft-tag { font-size:0.83rem; color:rgba(255,255,255,.4); line-height:1.7; }
+.fc h4 { font-size:0.72rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,.4); margin-bottom:14px; }
+.fc ul { list-style:none; display:flex; flex-direction:column; gap:9px; }
+.fc ul li a { font-size:0.86rem; color:rgba(255,255,255,.6); text-decoration:none; transition:color .2s; }
+.fc ul li a:hover { color:var(--sky); }
+.fb-bottom { display:flex; justify-content:space-between; align-items:center; padding-top:26px; flex-wrap:wrap; gap:10px; font-size:0.78rem; color:rgba(255,255,255,.3); }
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .hero-inner{grid-template-columns:1fr;}
+  .hero-right{display:none;}
+  #about .section-inner{grid-template-columns:1fr;}
+  .scope-head{grid-template-columns:1fr;}
+}
+/* ── HAMBURGER ── */
+.hamburger {
+  display:none; flex-direction:column; justify-content:center;
+  gap:5px; background:none; border:none; cursor:pointer;
+  padding:6px; border-radius:8px; transition:background .2s;
+}
+.hamburger:hover { background:var(--blue-pale); }
+.hamburger span {
+  display:block; width:22px; height:2px;
+  background:var(--dark); border-radius:2px;
+  transition:all .3s ease;
+}
+.hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
+.hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+
+/* ── MOBILE MENU ── */
+.mobile-menu {
+  display:none;
+  position:fixed; top:72px; left:0; right:0; z-index:199;
+  background:white;
+  border-bottom:1px solid rgba(20,71,230,0.1);
+  padding:20px 6% 28px;
+  flex-direction:column; gap:4px;
+  box-shadow:0 12px 40px rgba(0,0,0,0.1);
+  transform:translateY(-10px); opacity:0;
+  transition:all .3s ease;
+}
+.mobile-menu.open {
+  display:flex; transform:translateY(0); opacity:1;
+}
+.mobile-menu ul { list-style:none; display:flex; flex-direction:column; gap:2px; margin-bottom:16px; }
+.mobile-menu ul li a {
+  display:block; padding:13px 16px;
+  font-size:1rem; font-weight:600; color:var(--dark);
+  text-decoration:none; border-radius:12px; transition:all .2s;
+}
+.mobile-menu ul li a:hover { background:var(--blue-pale); color:var(--blue); }
+.mobile-cta { display:block; text-align:center; border-radius:12px !important; padding:14px !important; font-size:0.95rem !important; }
+
+.menu-overlay {
+  display:none; position:fixed; inset:0; z-index:198;
+  background:rgba(0,0,0,0.3);
+}
+.menu-overlay.open { display:block; }
+
+@media(max-width:768px){
+  .nav-links,.desktop-only { display:none; }
+  .hamburger { display:flex; }
+  section{padding:70px 5%;}
+  .mv-grid{grid-template-columns:1fr;}
+  .scope-grid{grid-template-columns:1fr 1fr;}
+  .cg{grid-template-columns:1fr;}
+  .stats-inner{grid-template-columns:repeat(2,1fr);}
+  .ft{grid-template-columns:1fr;}
+  .fr{grid-template-columns:1fr;}
+}
+@media(max-width:480px){
+  .scope-grid{grid-template-columns:1fr;}
+  .vals{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#" class="logo">
+    <div class="logo-star"></div>
+    <div class="logo-text">1Bright <span>Galaxy</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About Us</a></li>
+    <li><a href="#mission">Mission</a></li>
+    <li><a href="#scope">Why Us</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-btn desktop-only" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get a Quote →</button>
+  <button class="hamburger" id="menuBtn" aria-label="Open menu" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="#services" onclick="closeMenu()">Services</a></li>
+    <li><a href="#about" onclick="closeMenu()">About Us</a></li>
+    <li><a href="#mission" onclick="closeMenu()">Mission</a></li>
+    <li><a href="#scope" onclick="closeMenu()">Why Us</a></li>
+    <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+  </ul>
+  <a href="#contact" class="btn-blue mobile-cta" onclick="closeMenu()">Get a Quote →</a>
+</div>
+<div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-blob blob-1"></div>
+  <div class="hero-blob blob-2"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge">
+        <div class="badge-dot">✦</div>
+        <span>Gauteng's Premier Courier Service</span>
+      </div>
+      <h1>Fast. Reliable.<br><span class="grad">Delivered Right.</span></h1>
+      <p class="hero-desc">Professional courier &amp; logistics services across Gauteng — end-to-end secure delivery built on flexibility for retail, finance, education and more.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-blue">Book a Delivery &nbsp;→</a>
+        <a href="#services" class="btn-ghost">Our Services</a>
+      </div>
+      <div class="hero-trust">
+        <div class="trust-avs">
+          <div>JM</div><div>SA</div><div>TK</div><div>+</div>
+        </div>
+        <span>Trusted by businesses across Gauteng</span>
+      </div>
+    </div>
+
+    <!-- TRACKING CARD -->
+    <div class="hero-right">
+      <div class="mini-card mc1">
+        <div class="mci b">📦</div>
+        <div class="mct"><div class="t">Package Picked Up</div><div class="b">Kempton Park · 09:14</div></div>
+      </div>
+      <div class="track-card">
+        <div class="card-head">
+          <div class="card-title">Live Tracking · #BG2025</div>
+          <div class="status-pill">In Transit</div>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <div class="step-col"><div class="sdot done">✓</div><div class="sline done"></div></div>
+            <div class="sinfo"><div class="slabel">Parcel Collected</div><div class="ssub">Kempton Park · 08:30</div></div>
+          </div>
+          <div class="step">
+            <div class="step-col"><div class="sdot done">✓</div><div class="sline done"></div></div>
+            <div class="sinfo"><div class="slabel">In Sorting Hub</div><div class="ssub">Midrand · 09:45</div></div>
+          </div>
+          <div class="step">
+            <div class="step-col"><div class="sdot active">🚚</div><div class="sline"></div></div>
+            <div class="sinfo"><div class="slabel">Out for Delivery</div><div class="ssub">Sandton area · Now</div></div>
+          </div>
+          <div class="step">
+            <div class="step-col"><div class="sdot pend">○</div></div>
+            <div class="sinfo"><div class="slabel">Delivered</div><div class="ssub">Estimated 11:30</div></div>
+          </div>
+        </div>
+        <div class="eta-box">
+          <div><div class="eta-lbl">Estimated Arrival</div><div class="eta-val">Today, 11:30 AM</div></div>
+          <div style="font-size:0.78rem;color:var(--slate);">~45 min left</div>
+        </div>
+      </div>
+      <div class="mini-card mc2">
+        <div class="mci g">✅</div>
+        <div class="mct"><div class="t">Delivered Successfully</div><div class="b">Sandton · 10:52</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat-item"><div class="stat-num">24/7</div><div class="stat-lbl">Service Availability</div></div>
+    <div class="stat-item"><div class="stat-num">100%</div><div class="stat-lbl">Secure Delivery</div></div>
+    <div class="stat-item"><div class="stat-num">GTG</div><div class="stat-lbl">Gauteng-wide Coverage</div></div>
+    <div class="stat-item"><div class="stat-num">3+</div><div class="stat-lbl">Industries Served</div></div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-inner">
+    <div class="svc-top">
+      <div>
+        <div class="chip">⚡ What We Do</div>
+        <h2 class="st">Services Built<br>for Business</h2>
+      </div>
+      <p class="sd">No need for driver, sender, and receiver to be in the same place. Our in-built flexibility keeps your business moving.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc-card"><div class="svc-ico">🚚</div><div class="svc-name">Courier Delivery</div><p class="svc-desc">Fast, reliable same-day and next-day parcel delivery across Gauteng. From small parcels to bulk consignments, we handle it all with care.</p></div>
+      <div class="svc-card"><div class="svc-ico">🏭</div><div class="svc-name">Specialised Distribution</div><p class="svc-desc">Dedicated distribution tailored to your business model — fixed or variable schedules, full network accountability, timely and cost-effective.</p></div>
+      <div class="svc-card"><div class="svc-ico">🔐</div><div class="svc-name">Secure Logistics</div><p class="svc-desc">End-to-end secure logistics offering choice and safety to sender and receiver. Your parcel is always tracked and protected throughout its journey.</p></div>
+      <div class="svc-card"><div class="svc-ico">🤝</div><div class="svc-name">Strategic Partnerships</div><p class="svc-desc">Forging integrated partnerships to develop holistic logistics solutions. We treat your company name with the same care as your shipments.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-vis">
+      <div class="ab-badge">
+        <div class="ab-ico">⭐</div>
+        <div class="ab-info"><div class="t">Service Excellence</div><div class="b">Committed to quality</div></div>
+      </div>
+      <div class="about-box">
+        <div class="about-big">1BG</div>
+        <p class="about-q">"We communicate in order to understand and be understood — good communication is a two-way process."</p>
+        <p class="about-cap">— 1Bright Galaxy Core Philosophy</p>
+      </div>
+    </div>
+    <div>
+      <div class="chip">🌟 About Us</div>
+      <h2 class="st">Committed to<br>Service Excellence</h2>
+      <p class="sd" style="margin-bottom:26px;">We deliver exceptional courier services throughout Gauteng, built on patience, skill and commitment. Our strategic pillars guide every interaction.</p>
+      <div class="vals">
+        <div class="val"><div class="val-ico">⏱️</div><div><div class="val-title">Promptness</div><div class="val-sub">We never keep the customer waiting</div></div></div>
+        <div class="val"><div class="val-ico">😊</div><div><div class="val-title">Politeness</div><div class="val-sub">Cheerful greeting, always</div></div></div>
+        <div class="val"><div class="val-ico">📋</div><div><div class="val-title">Preparation</div><div class="val-sub">Precise and factual in all we do</div></div></div>
+        <div class="val"><div class="val-ico">👔</div><div><div class="val-title">Professionalism</div><div class="val-sub">We look and act the part</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION -->
+<section id="mission">
+  <div class="section-inner">
+    <div class="chip" style="background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);">🎯 Our Purpose</div>
+    <h2 class="st">Mission &amp; Vision</h2>
+    <div class="mv-grid">
+      <div class="mv-card blue">
+        <div class="mv-big">M</div>
+        <div class="mv-lbl">Mission</div>
+        <div class="mv-h">Why We Exist</div>
+        <p class="mv-t">To offer an exceptional courier and logistics solution through a comprehensive, safe network and talented staff — creating an environment where honesty, integrity and service excellence are everyday realities, while generating a profitable return for our investors.</p>
+      </div>
+      <div class="mv-card outline">
+        <div class="mv-big">V</div>
+        <div class="mv-lbl">Vision</div>
+        <div class="mv-h">Where We're Headed</div>
+        <p class="mv-t">To be the premier courier and logistics service provider in South Africa — utilising our own network and selected partners to deliver an exceptional service built on our core values of honesty, integrity and fair business practice.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCOPE -->
+<section id="scope">
+  <div class="section-inner">
+    <div class="scope-head">
+      <div>
+        <div class="chip">💼 Our Scope</div>
+        <h2 class="st">Your Business is<br>Our Priority</h2>
+      </div>
+      <p class="sd">We understand that your company reputation is delivered with every parcel. With that mind-set, here is what we ensure.</p>
+    </div>
+    <div class="scope-grid">
+      <div class="scope-card"><div class="scope-num">01</div><div class="scope-title">You Come First</div><p class="scope-desc">Your business is our number ONE priority. Every decision we make revolves around your success and satisfaction.</p></div>
+      <div class="scope-card"><div class="scope-num">02</div><div class="scope-title">Holistic Solutions</div><p class="scope-desc">We remain dedicated to offering holistic logistics solutions designed around your unique operational needs.</p></div>
+      <div class="scope-card"><div class="scope-num">03</div><div class="scope-title">Your Name Matters</div><p class="scope-desc">Your priceless company name is as important to us as your shipments — we protect both with equal care.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="chip">📬 Get In Touch</div>
+    <h2 class="st">Let's Move Your Business</h2>
+    <div class="cg">
+      <div class="ci">
+        <div class="ci-card"><div class="ci-ico">📞</div><div><div class="ci-lbl">Phone</div><div class="ci-val">+27 65 684 8253<br>+27 83 282 3854</div></div></div>
+        <div class="ci-card"><div class="ci-ico">✉️</div><div><div class="ci-lbl">Email</div><div class="ci-val"><a href="mailto:bernedicttsele@gmail.com">bernedicttsele@gmail.com</a></div></div></div>
+        <div class="ci-card"><div class="ci-ico">📍</div><div><div class="ci-lbl">Address</div><div class="ci-val">15 Margaret Avenue<br>Kempton Park, 1619<br>Gauteng, South Africa</div></div></div>
+        <div class="ci-card" style="border-bottom:none;"><div class="ci-ico">🕐</div><div><div class="ci-lbl">Hours</div><div class="ci-val">Mon–Fri: 07:00–18:00<br>Saturday: 08:00–14:00</div></div></div>
+      </div>
+      <div class="cfwrap">
+        <div class="cf-title">Send Us a Message</div>
+        <div class="fr">
+          <div><label>Full Name</label><input type="text" placeholder="Your name"></div>
+          <div><label>Company</label><input type="text" placeholder="Business name"></div>
+        </div>
+        <div class="fg"><label>Email Address</label><input type="email" placeholder="you@company.com"></div>
+        <div class="fg"><label>Phone Number</label><input type="tel" placeholder="+27 ..."></div>
+        <div class="fg">
+          <label>Service Needed</label>
+          <select>
+            <option value="">Select a service...</option>
+            <option>Courier Delivery</option>
+            <option>Specialised Distribution</option>
+            <option>Secure Logistics</option>
+            <option>Strategic Partnership</option>
+          </select>
+        </div>
+        <div class="fg"><label>Message</label><textarea placeholder="Tell us about your delivery requirements..."></textarea></div>
+        <button class="btn-blue" style="width:100%;justify-content:center;border-radius:12px;" onclick="alert('Thank you! We will be in touch within 24 hours.')">Send Message &nbsp;→</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft">
+    <div>
+      <div class="fb">1Bright <span>Galaxy</span></div>
+      <p class="ft-tag">Professional courier and logistics services throughout Gauteng. Delivering your business reputation with every parcel.</p>
+    </div>
+    <div class="fc">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">Courier Delivery</a></li>
+        <li><a href="#services">Distribution</a></li>
+        <li><a href="#services">Secure Logistics</a></li>
+        <li><a href="#services">Partnerships</a></li>
+      </ul>
+    </div>
+    <div class="fc">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#mission">Mission & Vision</a></li>
+        <li><a href="#scope">Why Choose Us</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="fb-bottom">
+    <span>© 2025 1Bright Galaxy Delivery Service. All rights reserved.</span>
+    <span>15 Margaret Avenue, Kempton Park 1619, Gauteng</span>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll',()=>{
+    document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>20);
+  });
+  function toggleMenu(){
+    const btn=document.getElementById('menuBtn');
+    const menu=document.getElementById('mobileMenu');
+    const overlay=document.getElementById('menuOverlay');
+    btn.classList.toggle('open');
+    menu.classList.toggle('open');
+    overlay.classList.toggle('open');
+  }
+  function closeMenu(){
+    document.getElementById('menuBtn').classList.remove('open');
+    document.getElementById('mobileMenu').classList.remove('open');
+    document.getElementById('menuOverlay').classList.remove('open');
+  }
+</script>
+</body>
+</html>
